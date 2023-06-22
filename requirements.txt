@@ -7,3 +7,4 @@ statsmodels==0.13.5
 scikit-learn==1.2.2
 kaleido==0.2.1
 streamlit==1.22.0
+lightgbm==3.2.1
