@@ -9,30 +9,16 @@ from PIL import Image
 import requests
 import io
 
+# Load the data from the API
 url = "https://app-api-eu-west-3.milesinthesky.education/leaderboard/geordie_history?groupName=Loud Squirrel"
+headers = {'x-api-key': '4A1ZxPSude5K1HjyaZ5y67Mrzkv4R8KW4OJtyaYH'}
+df_csv = pd.read_csv(url, headers=headers)
 
-payload = {}
-headers = {
-  'x-api-key': '4A1ZxPSude5K1HjyaZ5y67Mrzkv4R8KW4OJtyaYH'
-}
-
-response = requests.request("GET", url, headers=headers, data=payload)
-
-urlData = response.content
-df_csv = pd.read_csv(io.StringIO(urlData.decode('utf-8')))
-
+# Drop rows with missing values in 'PREDICTED_TARGET'
 o = df_csv.dropna(subset=['PREDICTED_TARGET'])
 
-
-def do_stuff_on_page_load():
-    st.set_page_config(layout="wide")
-
-do_stuff_on_page_load()
-
-st.header('Live Preds', anchor=None)
-
 # Calculate the cost for each prediction
-o['Cost'] = 0  # Initialize the 'Cost' column
+o['Cost'] = 0
 o.loc[(o['TARGET'] == 0) & (o['PREDICTED_TARGET'] == 1), 'Cost'] = -0.25 * o['AMT_CREDIT']
 o.loc[(o['TARGET'] == 1) & (o['PREDICTED_TARGET'] == 0), 'Cost'] = -1 * o['AMT_CREDIT']
 
@@ -43,33 +29,19 @@ grouped_avg_cost = o.groupby('Group')['Cost'].mean().reset_index()
 # Calculate the overall average cost
 avg_cost = grouped_avg_cost['Cost'].mean()
 
-# Create the scatter plot
-plt.figure(figsize=(10, 5))
-plt.scatter(grouped_avg_cost['Group'].astype(int), grouped_avg_cost['Cost'])
-plt.xlabel('Group')
-plt.ylabel('Average Cost')
+# Create the scatter plot using Plotly
+fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
+                 title='Average Cost by Group',
+                 labels={'Group': 'Group', 'Cost': 'Average Cost'},
+                 hover_data=['Group', 'Cost'])
 
 # Add a line for the average cost
-plt.axhline(y=avg_cost, color='r', linestyle='--', label='Average Cost')
-
-# Display the plot
-plt.legend()
-plt.tight_layout()
-
-# Save the plot to a temporary file
-plot_path = 'temp_plot.png'
-plt.savefig(plot_path)
-plt.close()
+fig.add_shape(type='line', x0=grouped_avg_cost['Group'].min(), y0=avg_cost, x1=grouped_avg_cost['Group'].max(), y1=avg_cost,
+              line=dict(color='red', dash='dash'), name='Average Cost')
 
 # Display the scatter plot in Streamlit
-st.title('Average Cost by Group')
-st.text('Scatter Plot of Average Cost for Each Group of 20 Predictions')
-st.image(plot_path)
+st.plotly_chart(fig)
 
 # Display the overall average cost
 st.subheader('Overall Average Cost')
 st.text(f'{avg_cost:.2f}')
-
-# Remove the temporary plot file
-import os
-os.remove(plot_path)
