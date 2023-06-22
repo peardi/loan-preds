@@ -32,9 +32,6 @@ do_stuff_on_page_load()
 st.header('Live Preds', anchor=None)
 
 # Calculate the cost for each prediction
-o = o.copy()  # Create a copy of the DataFrame to suppress the warning
-
-# Calculate the cost for each prediction
 o['Cost'] = 0  # Initialize the 'Cost' column
 o.loc[(o['TARGET'] == 0) & (o['PREDICTED_TARGET'] == 1), 'Cost'] = -0.25 * o['AMT_CREDIT']
 o.loc[(o['TARGET'] == 1) & (o['PREDICTED_TARGET'] == 0), 'Cost'] = -1 * o['AMT_CREDIT']
