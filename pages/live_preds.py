@@ -9,10 +9,27 @@ from PIL import Image
 import requests
 import io
 
-# Load the data from the API
 url = "https://app-api-eu-west-3.milesinthesky.education/leaderboard/geordie_history?groupName=Loud Squirrel"
-headers = {'x-api-key': '4A1ZxPSude5K1HjyaZ5y67Mrzkv4R8KW4OJtyaYH'}
-df_csv = pd.read_csv(url, headers=headers)
+
+payload = {}
+headers = {
+  'x-api-key': '4A1ZxPSude5K1HjyaZ5y67Mrzkv4R8KW4OJtyaYH'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+urlData = response.content
+df_csv = pd.read_csv(io.StringIO(urlData.decode('utf-8')))
+
+o = df_csv.dropna(subset=['PREDICTED_TARGET'])
+
+
+def do_stuff_on_page_load():
+    st.set_page_config(layout="wide")
+
+do_stuff_on_page_load()
+
+st.header('Live Preds', anchor=None)
 
 # Drop rows with missing values in 'PREDICTED_TARGET'
 o = df_csv.dropna(subset=['PREDICTED_TARGET'])
