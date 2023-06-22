@@ -31,8 +31,6 @@ do_stuff_on_page_load()
 
 st.header('Live Preds', anchor=None)
 
-#Import Data
-df = st.session_state['df']
 # Calculate the cost for each prediction
 o = o.copy()  # Create a copy of the DataFrame to suppress the warning
 
