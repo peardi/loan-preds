@@ -1,14 +1,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_curve, precision_recall_curve, confusion_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder,RobustScaler
 from sklearn.impute import SimpleImputer
 from lightgbm import LGBMClassifier
-import streamlit as st
 
 
 #🛑 Code to set the Dashboard format to wide (the content will fill the entire width of the page instead of having wide margins)
