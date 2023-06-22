@@ -49,7 +49,7 @@ avg_cost = grouped_avg_cost['Cost'].mean()
 # Create the scatter plot using Plotly
 fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
                  title='Average Cost by Group',
-                 labels={'Group': 'Group', 'Cost': 'Average Cost'},
+                 labels={'Group': 'Group of 10', 'Cost': 'Avg Cost'},
                  hover_data=['Group', 'Cost'])
 
 # Add a line for the average cost
