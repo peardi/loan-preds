@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder,RobustScaler
 from sklearn.impute import SimpleImputer
 from lightgbm import LGBMClassifier
+import streamlit as st
+
 
 #🛑 Code to set the Dashboard format to wide (the content will fill the entire width of the page instead of having wide margins)
 def do_stuff_on_page_load():
@@ -181,7 +183,6 @@ default_count = df[df['TARGET'] == 1].shape[0]
 repay_count = df[df['TARGET'] == 0].shape[0]
 default_rate = ((default_count/num_applicants)*100)
 
-import streamlit as st
 
 st.sidebar.header('Light Overview')
 
