@@ -72,3 +72,12 @@ st.plotly_chart(fig, use_container_width=True)
 # Display the overall average cost
 st.subheader('Overall Average Cost')
 st.text(f'{avg_cost:.2f}')
+
+# Create a SessionState object
+session_state = SessionState.get()
+
+# Retrieve the average cost
+avg_cost = session_state.average_cost
+
+# Display the average cost
+st.write("Average Cost:", avg_cost)
