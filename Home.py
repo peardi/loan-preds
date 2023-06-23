@@ -28,23 +28,18 @@ col2.metric("Default Rate",default_rate)
 #🛑 Code to import the dataset
 df = pd.read_csv('https://miles-become-a-data-scientist.s3.us-east-2.amazonaws.com/J3/M3/data/train.csv')
 
-st.session_state['df'] = df 
 #🛑 Code to persist the DataFrame between pages of the same Dashboard. Without this, any other page would need to re import the DataFrame and save it to df again.
-#st.session_state['df'] = df 
+st.session_state['df'] = df 
 
-with st.expander("Explorer Sunburst", expanded=True):
-    
-    # Group the data by multiple columns and calculate the count
-    grouped_data = df.groupby(['OCCUPATION_TYPE',
+# Group the data by multiple columns and calculate the count
+grouped_data = df.groupby(['OCCUPATION_TYPE',
         'NAME_EDUCATION_TYPE',
         'NAME_FAMILY_STATUS',
         'NAME_HOUSING_TYPE',
         'NAME_INCOME_TYPE','TARGET']).size().reset_index(name='Count')
-    
-    
-    
-    
-    
+
+with st.expander("Explorer Sunburst", expanded=True):
+
     # Create the sunburst chart using Plotly Express
     fig = px.sunburst(grouped_data, path=['OCCUPATION_TYPE',
         'NAME_EDUCATION_TYPE',
@@ -54,10 +49,8 @@ with st.expander("Explorer Sunburst", expanded=True):
         'TARGET'],height = 1900, values='Count',
                       title='Sunburst Chart of Education, Occupation and Target')
     
-    
     st.plotly_chart(fig,use_container_width=True)
     
-
 
 with st.expander("Income Type Distribution"):
     
