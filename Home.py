@@ -43,14 +43,18 @@ grouped_data = df.groupby(['OCCUPATION_TYPE',
 default_count = df[df['TARGET'] == 1].shape[0]
 repay_count = df[df['TARGET'] == 0].shape[0]
 
-# Code to display the pie chart in the sidebar
-st.sidebar.subheader('Loan Risk Distribution')
-labels = ['High Risk', 'Low Risk']
-values = [default_count, repay_count]
-colors = ['#bf5746', '#668f43']
-fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent', marker=dict(colors=colors))])
-fig.update_layout(title='Loan Risk Distribution', showlegend=False)
-st.sidebar.plotly_chart(fig)
+# Code to display the pie chart on the top right
+st.beta_container()
+with st.container():
+    col_pie = st.column()
+    with col_pie:
+        st.subheader('Loan Risk Distribution')
+        labels = ['High Risk', 'Low Risk']
+        values = [default_count, repay_count]
+        colors = ['#bf5746', '#668f43']
+        fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent', marker=dict(colors=colors))])
+        fig.update_layout(title='Loan Risk Distribution', showlegend=False)
+        st.plotly_chart(fig, use_container_width=True)
 
 with st.expander("Explorer Sunburst", expanded=True):
 
