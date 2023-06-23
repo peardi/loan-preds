@@ -22,7 +22,7 @@ st.header('Model distribution', anchor=None)
 col1, col2= st.columns(2)
 
 col1.metric("Applicants",6396208)
-default_rate = ("0.31 %)
+default_rate = ("0.31 %")
 col2.metric("Default Rate",default_rate)
 
 #🛑 Code to import the dataset
