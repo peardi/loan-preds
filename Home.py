@@ -166,10 +166,6 @@ results_df = pd.DataFrame({'True Labels': model_true, 'Predicted Labels': model_
 # Filter the DataFrame to include only the positive predictions
 positive_predictions = results_df[results_df['Predicted Labels'] == 1]
 
-# Calculate the average cost on the positive predictions
-average_cost = positive_predictions['AMT_CREDIT'].mean()
-st.write(average_cost)
-
 
 # Calculate evaluation metrics
 accuracy = accuracy_score(model_true, model_pred_labels)
@@ -193,12 +189,8 @@ repay_count = df[df['TARGET'] == 0].shape[0]
 default_rate = ((default_count/num_applicants)*100)
 
 
-st.sidebar.header('Light Overview')
-
-st.sidebar.subheader('Number of applicants')
-st.sidebar.write(num_applicants)
+st.write(num_applicants)
 
 default_rate = (default_rate, '%')
-st.sidebar.subheader('Probability of default')
-st.sidebar.write(default_rate)
+st.write(default_rate)
 
