@@ -17,7 +17,7 @@ do_stuff_on_page_load()
 
 #Set Header
 #🛑 Code to set the header
-st.header('Model metrics v1', anchor=None)
+st.header('Model distribution', anchor=None)
 
 
 
@@ -28,7 +28,7 @@ st.session_state['df'] = df
 #🛑 Code to persist the DataFrame between pages of the same Dashboard. Without this, any other page would need to re import the DataFrame and save it to df again.
 #st.session_state['df'] = df 
 
-with st.expander("Explorer Sunburst"):
+with st.expander("Explorer Sunburst", expanded=True):
     
     # Group the data by multiple columns and calculate the count
     grouped_data = df.groupby(['OCCUPATION_TYPE',
