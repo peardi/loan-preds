@@ -63,7 +63,7 @@ st.plotly_chart(fig)
 st.subheader('Overall Average Cost')
 st.text(f'{avg_cost:.2f}')
 
- Select metric option
+#Select metric option
 metric = st.selectbox('Select Metric', ['Cost', 'Profit'])
 
 # Calculate and display the selected metric
