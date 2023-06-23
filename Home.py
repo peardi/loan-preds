@@ -61,5 +61,5 @@ with st.expander("Income Type Distribution"):
     fig2 = px.bar(income_counts, x=income_counts.index, y=income_counts.values,
               labels={'x': 'Income Type', 'y': 'Count'}, title='Income Type Distribution')
     fig2.update_layout(xaxis_tickangle=-45)
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(fig2,use_container_width=True)
     
