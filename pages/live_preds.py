@@ -26,6 +26,15 @@ o = df_csv.dropna(subset=['PREDICTED_TARGET'])
 
 def do_stuff_on_page_load():
     st.set_page_config(layout="wide")
+  
+# Function to calculate expected profit
+def expected_profit(y_true, y_pred, amt_credit):
+    TN_indices = np.where((y_true == 0) & (y_pred == 0))
+    FN_indices = np.where((y_true == 1) & (y_pred == 0))
+    TN_profit = np.sum(0.25 * amt_credit.iloc[TN_indices])
+    FN_cost = np.sum(amt_credit.iloc[FN_indices])
+    profit = TN_profit - FN_cost
+    return profit
 
 do_stuff_on_page_load()
 
@@ -38,6 +47,9 @@ o = df_csv.dropna(subset=['PREDICTED_TARGET'])
 o['Cost'] = 0
 o.loc[(o['TARGET'] == 0) & (o['PREDICTED_TARGET'] == 1), 'Cost'] = -0.25 * o['AMT_CREDIT']
 o.loc[(o['TARGET'] == 1) & (o['PREDICTED_TARGET'] == 0), 'Cost'] = -1 * o['AMT_CREDIT']
+
+
+
 
 # Calculate the average cost for each group of 20 predictions
 o['Group'] = (o.index // 20) + 1
@@ -63,7 +75,7 @@ st.plotly_chart(fig)
 st.subheader('Overall Average Cost')
 st.text(f'{avg_cost:.2f}')
 
-#Select metric option
+# Select metric option
 metric = st.selectbox('Select Metric', ['Cost', 'Profit'])
 
 # Calculate and display the selected metric
@@ -72,4 +84,5 @@ if metric == 'Cost':
     st.text(f'{avg_cost:.2f}')
 elif metric == 'Profit':
     st.subheader('Overall Profit')
-    profit = expected_profit(o['TARGET'], o['PREDICTED_TARGET'], o['AMT_C
+    profit = expected_profit(o['TARGET'], o['PREDICTED_TARGET'], o['AMT_CREDIT'])
+    st.text(f'{profit:.2f}')
