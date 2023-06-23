@@ -48,10 +48,18 @@ with st.expander("Explorer Sunburst"):
         'NAME_HOUSING_TYPE',
         'NAME_INCOME_TYPE',
         'TARGET'],height = 1900, values='Count',
-                      title='Sunburst Chart of Education, Occupation, and Target')
+                      title='Sunburst Chart of Education, Occupation and Target')
     
     
     st.plotly_chart(fig,use_container_width=True)
     
+
+
+with st.expander("Income Type Distribution"):
     
+    income_counts = df['NAME_INCOME_TYPE'].value_counts()
+    fig2 = px.bar(income_counts, x=income_counts.index, y=income_counts.values,
+              labels={'x': 'Income Type', 'y': 'Count'}, title='Income Type Distribution')
+    fig2.update_layout(xaxis_tickangle=-45)
+    st.plotly_chart(fig,use_container_width=True)
     
