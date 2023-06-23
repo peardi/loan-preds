@@ -28,7 +28,7 @@ st.session_state['df'] = df
 #🛑 Code to persist the DataFrame between pages of the same Dashboard. Without this, any other page would need to re import the DataFrame and save it to df again.
 #st.session_state['df'] = df 
 
-with st.spinner(text="Carregar..."): #Replace the ... by the spinner method
+with st.expander(f"Explorer Sunburst",expanded=True):
     
     # Group the data by multiple columns and calculate the count
     grouped_data = df.groupby(['OCCUPATION_TYPE',
