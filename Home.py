@@ -168,7 +168,6 @@ positive_predictions = results_df[results_df['Predicted Labels'] == 1]
 
 # Calculate the average cost on the positive predictions
 average_cost = positive_predictions['AMT_CREDIT'].mean()
-session_state.average_cost = average_cost
 st.write(average_cost)
 
 
