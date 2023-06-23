@@ -4,12 +4,6 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.graph_objects as go
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_curve, precision_recall_curve, confusion_matrix
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder,RobustScaler
-from sklearn.impute import SimpleImputer
-from lightgbm import LGBMClassifier
-
 
 
 #🛑 Code to set the Dashboard format to wide (the content will fill the entire width of the page instead of having wide margins)
@@ -27,7 +21,7 @@ col1.metric("Requests",6396208)
 default_rate = ("0.31 %")
 col2.metric("Default Rate",default_rate)
 target_repay =("91,9%")
-col3.metric("TARGET REPAY",target_repay,"+")
+col3.metric("TARGET Repay",target_repay,"+")
 target_default =("8.1%")
 col4.metric("TARGET Default",target_default,"-")            
 
