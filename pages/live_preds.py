@@ -64,34 +64,7 @@ fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
                  labels={'Group': 'Group of 10', 'Cost': 'Avg Cost'},
                  hover_data=['Group', 'Cost'])
 
-# Select metric option
-metric = st.selectbox('Select Metric', ['Cost', 'Profit'], key='metric')
-# Apply CSS styling to the select box to make it smaller
-st.markdown(
-    """
-    <style>
-    .css-1qgg64u.e1ehc9qe0 select {
-        width: 150px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
-# Calculate and display the selected metric
-if metric == 'Cost':
-    st.subheader('Overall Cost')
-    st.text(f'{avg_cost:.2f}')
-    selected_metric = avg_cost
-elif metric == 'Profit':
-    st.subheader('Overall Profit')
-    profit = expected_profit(o['TARGET'], o['PREDICTED_TARGET'], o['AMT_CREDIT'])
-    st.text(f'{profit:.2f}')
-    selected_metric = profit
-
-# Add a line for the selected metric
-fig.add_shape(type='line', x0=grouped_avg_cost['Group'].min(), y0=selected_metric, x1=grouped_avg_cost['Group'].max(), y1=selected_metric,
-              line=dict(color='red', dash='dash'), name=metric)
 
 # Display the scatter plot in Streamlit with wider width
 st.plotly_chart(fig, use_container_width=True)
