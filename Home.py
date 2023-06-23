@@ -26,9 +26,9 @@ col1, col2,col3,col4= st.columns(4)
 col1.metric("Requests",6396208)
 default_rate = ("0.31 %")
 col2.metric("Default Rate",default_rate)
-target_repay =("91,9%)
+target_repay =("91,9%")
 col3.metric("TARGET REPAY",target_repay)
-target_default =("8.1%)
+target_default =("8.1%")
 col4.metric("TARGET Default",target_default)            
 
 #🛑 Code to import the dataset
