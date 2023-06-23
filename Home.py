@@ -38,6 +38,9 @@ grouped_data = df.groupby(['OCCUPATION_TYPE',
         'NAME_HOUSING_TYPE',
         'NAME_INCOME_TYPE','TARGET']).size().reset_index(name='Count')
 
+default_count = df[df['TARGET'] == 1].shape[0]
+repay_count = df[df['TARGET'] == 0].shape[0]
+
 # Code to display the pie chart in the sidebar
 st.sidebar.subheader('Loan Risk Distribution')
 labels = ['High Risk', 'Low Risk']
