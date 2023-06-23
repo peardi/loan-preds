@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder,RobustScaler
 from sklearn.impute import SimpleImputer
 from lightgbm import LGBMClassifier
-from streamlit import SessionState
+from session_state import SessionState
 
 
 
