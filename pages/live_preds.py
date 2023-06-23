@@ -50,8 +50,7 @@ avg_cost = grouped_avg_cost['Cost'].mean()
 fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
                  title='Avg loss',
                  labels={'Group': 'Group of 10', 'Cost': 'Avg Cost'},
-                 hover_data=['Group', 'Cost'],
-                 trendline="rolling")
+                 hover_data=['Group', 'Cost'])
 
 # Add a line for the average cost
 fig.add_shape(type='line', x0=grouped_avg_cost['Group'].min(), y0=avg_cost, x1=grouped_avg_cost['Group'].max(), y1=avg_cost,
