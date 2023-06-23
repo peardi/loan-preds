@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from PIL import Image
 import requests
 import io
-from streamlit import SessionState
+from session_state import SessionState
 
 
 url = "https://app-api-eu-west-3.milesinthesky.education/leaderboard/geordie_history?groupName=Loud Squirrel"
