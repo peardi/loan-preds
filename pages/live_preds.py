@@ -62,3 +62,14 @@ st.plotly_chart(fig)
 # Display the overall average cost
 st.subheader('Overall Average Cost')
 st.text(f'{avg_cost:.2f}')
+
+ Select metric option
+metric = st.selectbox('Select Metric', ['Cost', 'Profit'])
+
+# Calculate and display the selected metric
+if metric == 'Cost':
+    st.subheader('Overall Cost')
+    st.text(f'{avg_cost:.2f}')
+elif metric == 'Profit':
+    st.subheader('Overall Profit')
+    profit = expected_profit(o['TARGET'], o['PREDICTED_TARGET'], o['AMT_C
