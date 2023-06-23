@@ -46,7 +46,7 @@ repay_count = df[df['TARGET'] == 0].shape[0]
 # Code to display the pie chart on the top right
 st.beta_container()
 with st.container():
-    col_pie = st.column()
+    col_pie, _ = st.beta_columns([3, 1])
     with col_pie:
         st.subheader('Loan Risk Distribution')
         labels = ['High Risk', 'Low Risk']
