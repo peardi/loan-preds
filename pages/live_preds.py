@@ -65,7 +65,18 @@ fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
                  hover_data=['Group', 'Cost'])
 
 # Select metric option
-metric = st.selectbox('Select Metric', ['Cost', 'Profit'], key='metric', width=200)
+metric = st.selectbox('Select Metric', ['Cost', 'Profit'], key='metric')
+# Apply CSS styling to the select box to make it smaller
+st.markdown(
+    """
+    <style>
+    .css-1qgg64u.e1ehc9qe0 select {
+        width: 150px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Calculate and display the selected metric
 if metric == 'Cost':
