@@ -64,17 +64,6 @@ fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
                  labels={'Group': 'Group of 10', 'Cost': 'Avg Cost'},
                  hover_data=['Group', 'Cost'])
 
-# Add a line for the average cost
-fig.add_shape(type='line', x0=grouped_avg_cost['Group'].min(), y0=avg_cost, x1=grouped_avg_cost['Group'].max(), y1=avg_cost,
-              line=dict(color='red', dash='dash'), name='Average Cost')
-
-# Display the scatter plot in Streamlit
-st.plotly_chart(fig)
-
-# Display the overall average cost
-st.subheader('Overall Average Cost')
-st.text(f'{avg_cost:.2f}')
-
 # Select metric option
 metric = st.selectbox('Select Metric', ['Cost', 'Profit'])
 
@@ -86,3 +75,15 @@ elif metric == 'Profit':
     st.subheader('Overall Profit')
     profit = expected_profit(o['TARGET'], o['PREDICTED_TARGET'], o['AMT_CREDIT'])
     st.text(f'{profit:.2f}')
+
+# Add a line for the average cost
+fig.add_shape(type='line', x0=grouped_avg_cost['Group'].min(), y0=metric, x1=grouped_avg_cost['Group'].max(), y1=metric,
+              line=dict(color='red', dash='dash'), name='nn')
+
+# Display the scatter plot in Streamlit
+st.plotly_chart(fig)
+
+# Display the overall average cost
+st.subheader('Overall Average Cost')
+st.text(f'{avg_cost:.2f}')
+
