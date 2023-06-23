@@ -21,7 +21,7 @@ st.header('Model distribution', anchor=None)
 
 col1, col2= st.columns(2)
 
-col1.metric("Applicants",6396208)
+col1.metric("Requests",6396208)
 default_rate = ("0.31 %")
 col2.metric("Default Rate",default_rate)
 
@@ -37,6 +37,17 @@ grouped_data = df.groupby(['OCCUPATION_TYPE',
         'NAME_FAMILY_STATUS',
         'NAME_HOUSING_TYPE',
         'NAME_INCOME_TYPE','TARGET']).size().reset_index(name='Count')
+
+# Code to display the pie chart in the sidebar
+st.sidebar.subheader('Loan Risk Distribution')
+labels = ['High Risk', 'Low Risk']
+values = [default_count, repay_count]
+colors = ['#bf5746', '#668f43']
+explode = [0.1, 0]
+fig, ax = plt.subplots()
+ax.pie(values, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', startangle=90)
+ax.axis('equal')
+st.sidebar.pyplot(fig)
 
 with st.expander("Explorer Sunburst", expanded=True):
 
