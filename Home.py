@@ -63,3 +63,8 @@ with st.expander("Income Type Distribution"):
     fig2.update_layout(xaxis_tickangle=-45)
     st.plotly_chart(fig2,use_container_width=True)
     
+with st.expander("Gender Distribution"):    
+    gender_counts = df['CODE_GENDER'].value_counts()
+    fig3 = px.pie(gender_counts, values=gender_counts.values, names=gender_counts.index,
+                  title='Gender Distribution')
+    st.plotly_chart(fig3,use_container_width=True)
