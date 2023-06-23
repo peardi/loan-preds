@@ -49,8 +49,8 @@ fig = px.sunburst(grouped_data, path=['OCCUPATION_TYPE',
     'TARGET'],height = 1900, values='Count',
                   title='Sunburst Chart of Education, Occupation, and Target')
 
-# Show the plot
-fig.show()
+
+st.plotly_chart(fig)
 
 
 
