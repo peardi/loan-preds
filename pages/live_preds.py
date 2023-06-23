@@ -1,4 +1,4 @@
-import streamlit as st
+lossimport streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -60,8 +60,8 @@ avg_cost = grouped_avg_cost['Cost'].mean()
 
 # Create the scatter plot using Plotly
 fig = px.scatter(grouped_avg_cost, x='Group', y='Cost',
-                 title='Avg loss',
-                 labels={'Group': 'Group of 10', 'Cost': 'Avg Cost'},
+                 title='Average loss - groups of 20 preditions ',
+                 labels={'Group': 'Group of 20', 'Cost': 'Avg loss'},
                  hover_data=['Group', 'Cost'])
 
 
