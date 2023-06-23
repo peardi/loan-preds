@@ -159,7 +159,8 @@ model_true = y_test
 threshold = 0.71
 model_pred_labels = [1 if prob >= threshold else 0 for prob in model_preds]
 
-
+# Create a SessionState object
+session_state = SessionState.get(average_cost=0)
 # Create a DataFrame with the true labels and predicted labels
 results_df = pd.DataFrame({'True Labels': model_true, 'Predicted Labels': model_pred_labels})
 
@@ -168,8 +169,8 @@ positive_predictions = results_df[results_df['Predicted Labels'] == 1]
 
 # Calculate the average cost on the positive predictions
 average_cost = positive_predictions['AMT_CREDIT'].mean()
-# Create a SessionState object
-session_state = SessionState.get(average_cost)
+session_state.average_cost = average_cost
+
 
 # Calculate evaluation metrics
 accuracy = accuracy_score(model_true, model_pred_labels)
