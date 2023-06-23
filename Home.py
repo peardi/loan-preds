@@ -19,13 +19,17 @@ do_stuff_on_page_load()
 
 #Set Header
 #🛑 Code to set the header
-st.header('Model distribution', anchor=None)
+st.header('Feature analysis', anchor=None)
 
-col1, col2= st.columns(2)
+col1, col2,col3,col4= st.columns(4)
 
 col1.metric("Requests",6396208)
 default_rate = ("0.31 %")
 col2.metric("Default Rate",default_rate)
+target_repay =("91,9%)
+col3.metric("TARGET REPAY",target_repay)
+target_default =("8.1%)
+col4.metric("TARGET Default",target_default)            
 
 #🛑 Code to import the dataset
 df = pd.read_csv('https://miles-become-a-data-scientist.s3.us-east-2.amazonaws.com/J3/M3/data/train.csv')
@@ -42,19 +46,6 @@ grouped_data = df.groupby(['OCCUPATION_TYPE',
 
 default_count = df[df['TARGET'] == 1].shape[0]
 repay_count = df[df['TARGET'] == 0].shape[0]
-
-# Code to display the pie chart on the top right
-st.beta_container()
-with st.container():
-    col_pie, _ = st.beta_columns([3, 1])
-    with col_pie:
-        st.subheader('Loan Risk Distribution')
-        labels = ['High Risk', 'Low Risk']
-        values = [default_count, repay_count]
-        colors = ['#bf5746', '#668f43']
-        fig = go.Figure(data=[go.Pie(labels=labels, values=values, textinfo='label+percent', marker=dict(colors=colors))])
-        fig.update_layout(title='Loan Risk Distribution', showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
 
 with st.expander("Explorer Sunburst", expanded=True):
 
