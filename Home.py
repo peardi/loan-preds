@@ -19,7 +19,11 @@ do_stuff_on_page_load()
 #🛑 Code to set the header
 st.header('Model distribution', anchor=None)
 
+col1, col2= st.columns(2)
 
+col1.metric("Applicants",6396208)
+default_rate = ("0.31 %)
+col2.metric("Default Rate",default_rate)
 
 #🛑 Code to import the dataset
 df = pd.read_csv('https://miles-become-a-data-scientist.s3.us-east-2.amazonaws.com/J3/M3/data/train.csv')
