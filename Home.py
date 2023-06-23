@@ -27,5 +27,5 @@ st.session_state['df'] = df
 #🛑 Code to persist the DataFrame between pages of the same Dashboard. Without this, any other page would need to re import the DataFrame and save it to df again.
 #st.session_state['df'] = df 
 
-
+st.write('ola mundi')
 
