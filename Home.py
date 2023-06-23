@@ -27,5 +27,29 @@ st.session_state['df'] = df
 #🛑 Code to persist the DataFrame between pages of the same Dashboard. Without this, any other page would need to re import the DataFrame and save it to df again.
 #st.session_state['df'] = df 
 
-st.write('ola mundi')
+
+# Group the data by multiple columns and calculate the count
+grouped_data = df.groupby(['OCCUPATION_TYPE',
+    'NAME_EDUCATION_TYPE',
+    'NAME_FAMILY_STATUS',
+    'NAME_HOUSING_TYPE',
+    'NAME_INCOME_TYPE','TARGET']).size().reset_index(name='Count')
+
+
+
+
+
+# Create the sunburst chart using Plotly Express
+fig = px.sunburst(grouped_data, path=['OCCUPATION_TYPE',
+    'NAME_EDUCATION_TYPE',
+    'NAME_FAMILY_STATUS',
+    'NAME_HOUSING_TYPE',
+    'NAME_INCOME_TYPE',
+    'TARGET'],height = 1900, values='Count',
+                  title='Sunburst Chart of Education, Occupation, and Target')
+
+# Show the plot
+fig.show()
+
+
 
