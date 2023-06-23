@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder,RobustScaler
 from sklearn.impute import SimpleImputer
 from lightgbm import LGBMClassifier
-from session_state import SessionState
 
 
 
@@ -161,8 +160,6 @@ model_true = y_test
 threshold = 0.71
 model_pred_labels = [1 if prob >= threshold else 0 for prob in model_preds]
 
-# Create a SessionState object
-session_state = SessionState.get(average_cost=0)
 # Create a DataFrame with the true labels and predicted labels
 results_df = pd.DataFrame({'True Labels': model_true, 'Predicted Labels': model_pred_labels})
 
@@ -172,6 +169,7 @@ positive_predictions = results_df[results_df['Predicted Labels'] == 1]
 # Calculate the average cost on the positive predictions
 average_cost = positive_predictions['AMT_CREDIT'].mean()
 session_state.average_cost = average_cost
+st.write(average_cost)
 
 
 # Calculate evaluation metrics
